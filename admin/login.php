@@ -91,6 +91,7 @@ if (isset($_POST['login'])) {
         </form>
         <p style="text-align: center; margin-top: 1rem; color: #666;">
             Enter admin dashboard
+           <br> <a href="/brexers-fashion/index.php"><i class="fas fa-home"></i> Home</a>
         </p>
     </div>
 </body>

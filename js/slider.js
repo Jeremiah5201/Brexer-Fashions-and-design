@@ -1,10 +1,10 @@
 class Slider {
     constructor() {
         this.slides = [];
-        this.currentSlide = 0;
+        this.currentSlide = 0; // index of the current group (page) of slides
         this.isAuto = true;
         this.autoInterval = null;
-        this.slideInterval = 4000; // 4 seconds
+        this.slideInterval = 7000; // 7 seconds for slower sliding
         
         this.init();
     }
@@ -27,12 +27,27 @@ class Slider {
         
         // This would be replaced with actual product images
         const defaultSlides = [
-            { image: 'images/slide1.jpeg', title: 'Summer Collection' },
-            { image: 'images/slide2.jpeg', title: 'Winter Fashion' },
-            { image: 'images/slide3.jpeg', title: 'Casual Wear' },
-            { image: 'images/slide4.jpeg', title: 'Evening Style' },
-            { image: 'images/slide5.jpeg', title: 'Street wear' },
-            { image: 'images/images.jpeg', title: 'Street Fashion' }
+            { image: 'images/men5.jpg', title: 'Summer Collection' },
+            { image: 'images/lady3.jpg', title: 'Winter Fashion' },
+            { image: 'images/kid2.jpg', title: 'Casual Wear' },
+            { image: 'images/men4.jpg', title: '' },
+            { image: 'images/lady.jpg', title: 'Street wear' },
+            { image: 'images/ladie1.jpg', title: 'Street Fashion' },
+            { image: 'images/men3.jpg', title: 'Evening' },
+            { image: 'images/kid3.jpg', title: 'Style' },
+            { image: 'images/kid1.jpg', title: 'EStyle' },
+            { image: 'images/fashion.jpg', title: 'EveningS' },
+            { image: 'images/fashion1.jpg', title: 'Eveyle' },
+            { image: 'images/kid4.jpg', title: 'ing Style' },
+            { image: 'images/fashion3.jpg', title: 'Evening Style' },
+            { image: 'images/fashion4.jpg', title: 'Evening Style' },
+            { image: 'images/fashion5.jpg', title: 'Evening Style' },
+            { image: 'images/fashion6.jpg', title: 'Evening Style' },
+            { image: 'images/fashion10.jpg', title: 'Evening Style' },
+            { image: 'images/fashion7.jpg', title: 'Evening Style' },
+            { image: 'images/fashion8.jpg', title: 'Evening Style' },
+            { image: 'images/fashion9.jpg', title: 'Evening Style' },
+            { image: 'images/men.jpg', title: 'Evening Style' },
         ];
         
         this.slides = defaultSlides;
@@ -48,14 +63,19 @@ class Slider {
                 </div>
             `;
             slidesContainer.appendChild(slideElement);
-            
-            // Create indicator
-            const indicator = document.createElement('div');
-            indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
-            indicator.dataset.index = index;
-            indicator.addEventListener('click', () => this.goToSlide(index));
-            indicators.appendChild(indicator);
         });
+
+        // Create indicators per group (3 slides per group)
+        const slidesPerGroup = 3;
+        const groupCount = Math.ceil(this.slides.length / slidesPerGroup);
+
+        for (let i = 0; i < groupCount; i++) {
+            const indicator = document.createElement('div');
+            indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
+            indicator.dataset.index = i;
+            indicator.addEventListener('click', () => this.goToSlide(i));
+            indicators.appendChild(indicator);
+        }
     }
     
     setupControls() {
@@ -96,12 +116,16 @@ class Slider {
     }
     
     nextSlide() {
-        this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+        const slidesPerGroup = 3;
+        const groupCount = Math.ceil(this.slides.length / slidesPerGroup);
+        this.currentSlide = (this.currentSlide + 1) % groupCount;
         this.updateSlider();
     }
     
     prevSlide() {
-        this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+        const slidesPerGroup = 3;
+        const groupCount = Math.ceil(this.slides.length / slidesPerGroup);
+        this.currentSlide = (this.currentSlide - 1 + groupCount) % groupCount;
         this.updateSlider();
     }
     
@@ -114,8 +138,9 @@ class Slider {
     updateSlider() {
         const slidesContainer = document.querySelector('.slides');
         const indicators = document.querySelectorAll('.indicator');
+        const slidesPerGroup = 3;
         
-        // Move slides
+        // Move slides by group: each group is 100% width (contains 3 slides at 33.3333% each)
         slidesContainer.style.transform = `translateX(-${this.currentSlide * 100}%)`;
         
         // Update indicators

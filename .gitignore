@@ -1,0 +1,15 @@
+# Local config (do not commit real credentials)
+config.php
+
+# Composer / vendor
+vendor/
+
+# Environment / secret files
+.env
+*.log
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

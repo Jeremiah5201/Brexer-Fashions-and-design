@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+// Main entry point for Brexers Fashions
+// Currently no server-side rendering is needed; layout is same as old index.html.
+// PHP is used so we can easily add dynamic content later if needed.
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +10,7 @@
     <title>BREXERS FASHIONS AND DESIGN</title>
     <link rel="stylesheet" href="css/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <!-- Header -->
@@ -14,11 +18,12 @@
         <div class="container">
             <nav class="navbar">
                 <div class="logo">
-                    <img src="images/icon.png" alt="Brexers Fashions Logo" class="logo-image">
+                    <a href="index.php"><img src="images/icon.png" alt="Brexers Fashions Logo" class="logo-image"></a>
                     <div>
-                        <h1>BREXERS FASHIONS</h1>
+                        <h1>BREXERS FASHIONS AND DESIGN</h1>
                         <p class="tagline">Style Redefined</p>
                     </div>
+                    
                 </div>
                 <button class="nav-toggle" aria-label="Toggle navigation">
                     <span class="bar"></span>
@@ -26,7 +31,7 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-links">
-                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="index.php"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="#products"><i class="fas fa-tags"></i> Products</a></li>
                     <li><a href="admin/dashboard.php"><i class="fas fa-user-shield"></i> Admin</a></li>
                 </ul>
@@ -114,13 +119,12 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 BREXERS FASHIONS AND DESIGN. All rights reserved.</p>
+            <p>&copy; <?php echo date('Y'); ?> BREXERS FASHIONS AND DESIGN. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- JavaScript Files -->
     <script src="js/slider.js"></script>
     <script src="js/main.js"></script>
-    
 </body>
 </html>
